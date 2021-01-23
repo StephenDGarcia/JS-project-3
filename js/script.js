@@ -11,14 +11,13 @@ let otherJobRole = document.getElementById('other-job-role');
 console.log(otherJobRole);
 otherJobRole.hidden = true;
 
-let selectOther = document.querySelector('[value=other]');
-console.log(selectOther);
-
-// $('otherJobRole').on('click keypress', function() {
+ let selectOther = document.querySelector('[value=other]');
+ console.log(selectOther);
 
 jobRole.addEventListener('change', (e) => {
-   if ( otherJobRole ) {
-       otherJobRole.style.visibility = 'visible';
+    if ( e.target.value == 'other' ) {
+       otherJobRole.hidden = false;
+   } else {
+       otherJobRole.hidden = true;
    }
 });
-// })
