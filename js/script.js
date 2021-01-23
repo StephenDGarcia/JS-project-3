@@ -9,14 +9,16 @@ console.log(jobRole)
 
 let otherJobRole = document.getElementById('other-job-role');
 console.log(otherJobRole);
-otherJobRole.style.visibility = 'hidden';
+otherJobRole.hidden = true;
 
 let selectOther = document.querySelector('[value=other]');
 console.log(selectOther);
 
 // $('otherJobRole').on('click keypress', function() {
 
-selectOther.addEventListener('change', (e) => {
-   otherJobRole.style.visibility = 'visible';
+jobRole.addEventListener('change', (e) => {
+   if ( otherJobRole ) {
+       otherJobRole.style.visibility = 'visible';
+   }
 });
 // })
