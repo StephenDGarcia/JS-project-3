@@ -98,28 +98,29 @@ payment.addEventListener('change', e => {
         bitcoin.hidden = 'false';
     }
 })
-// Now save and refresh the page, and when the payment method option is updated in the drop-down menu, the payment sections in the form will update accordingly.
 
-// The "Name" <input type="text"> element (should already have a variable)
-// The "Email Address" <input type="text"> element
-// The "Register for Activities" <fieldset> element (should already have a variable)
-// The "Card number" <input type="text"> element
-// The "Zip code" <input type="text"> element
-// The "CVV" <input type="text"> element
-// The <form> element
-// Create variables for the above elements that haven’t already had variables created for them, and log them out to ensure they are what you expect them to be.
+const email = document.getElementById('email');
+const ccNumber = document.getElementById('cc-num');
+const zip = document.getElementById('zip');
+const cvv = document.getElementById('cvv');
+const form = document.getElementsByTagName('form');
+
 // Use the "form" variable to listen for the submit event.
-// Inside the event listener, use the name variable, dot notation and the value property to create a new variable that references the value of the “Name” field.
-// Create another variable to store the results of testing the name value variable that was just created. Regex will be helpful, and the regex course from this unit will demonstrate how to do this. This variable will equal true if the test passes, and false otherwise.
-// Log these variables out to the console to check the "Name" field’s value and if it passes the custom validation test. To see this log statement printed to the console, you’ll have to do three things:
-// Enter something into the “Name” field
-// Add a temporary event.preventDefault() statement to prevent the form from refreshing when the submit button is clicked.
-// Click the submit button
-// Still in the event listener, use the name validation test variable and an if statement to check if the name value is valid. If false, prevent the form from submitting with an event.preventDefault() statement. Otherwise, do nothing and allow the form to submit.
-// Repeat steps 3 through 6 above for each of the required fields. Review the project instructions for the list of required fields or sections and the validation requirements of each. And remember that the credit card fields should only be validated if "credit card" is the selected payment method.
 
-// Note: Inside the event listener is ultimately where the required fields or sections will be tested. But rather than creating all the tests there, it can be helpful to create helper functions for each required field that can then be called in the event listener to do the testing and return true or false depending on whether the field is valid or not.
+    
 
-// If you added an extra `event.preventDefault()` statement for testing purposes, it should be removed. Here, the form should only be prevented from submitting if one or more of the required form fields is invalid.
+function isValidName(named) {
+    return /[a-z]+/.test(named)
+}
 
-// Now save and refresh the page, and when the submit button is clicked, the form should only submit and refresh if all the required fields are valid.
+function createListener(validator) {
+    return e => {
+        const text = e.target.value;
+        const valid = validator(text);
+        const showTip = text !== "" && !valid;
+        const tooltip = e.target.nextElementSibling;
+        showOrHideTip(showTip, tooltip)
+    };
+}
+
+name.addEventListener("input", createListener(isValidName))
